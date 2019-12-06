@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package models;
+
+import "LocationModel.proto";
+
+option java_package = "eu.recap.sim.models";
+option java_outer_classname = "WorkloadModel";
+
+message Workload{
+	repeated Device devices =1;
+	string notes = 2;
+}
+
+message Device {
+	string deviceId = 3;
+	string deviceName = 4;
+	repeated Location locations = 2;
+	repeated Request requests = 1;
+}
+
+message Request {
+	int64 time = 1;
+	string applicationId = 2;
+	string componentId = 3;
+	string apiId = 4;
+	string dataId = 5;
+	int64 dataToTransfer = 6;
+}

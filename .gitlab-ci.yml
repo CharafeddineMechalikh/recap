@@ -1,0 +1,38 @@
+image: maven:latest
+
+stages:
+  - build
+#  - test
+  - docker
+
+variables:
+  MAVEN_CLI_OPTS: ""
+  MAVEN_OPTS: ""
+
+cache:
+  paths:
+    - .m2/repository/
+    - target/
+
+build:
+  stage: build
+  artifacts:
+    paths:
+    - RecapSim-package/RecapSim-API/target/RecapSim-API-0.0.1-SNAPSHOT-jar-with-dependencies.jar
+  script:
+    - cd RecapSim-package
+    - mvn $MAVEN_CLI_OPTS package
+
+#test:
+#  stage: test
+#  script:
+#    - cd RecapSim-package
+#    - mvn $MAVEN_CLI_OPTS test
+
+docker:
+  stage: docker
+  image: docker:latest
+  script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker build --pull -t "$CI_REGISTRY_IMAGE" --build-arg BUILD_DATE=$(date +%Y-%m-%d) -f docker/Dockerfile .
+    - docker push "$CI_REGISTRY_IMAGE"
