@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package models;
+
+option java_package = "eu.recap.sim.models";
+option java_outer_classname = "Utilisation";
+
+
+message ExperimentResults{
+	string ExperimentId = 1;
+	repeated ResourceSiteMetrics siteMetrics =2;
+	repeated ApplicationMetrics applicationMetrics = 3;
+}
+
+//
+message ResourceSiteMetrics{
+	string siteName = 1;
+	string siteId = 2;
+	repeated NodeMetrics nodesMetrics =3;
+	repeated NetworkMetrics linksMetrics =4; //includes switches, routers and links
+}
+
+message NodeMetrics{
+	string nodeName = 1;
+	string nodeId = 2;
+	repeated Utilization cpuUtilization =3;
+	repeated Utilization memoryUtilization =4;
+	repeated Utilization storageUtilization =5;
+	repeated Utilization powerUtilization =6; //Watts
+}
+
+message NetworkMetrics{
+	string Name = 1;
+	string ID = 2;
+	repeated Utilization linkUtilization =3;
+}
+
+message Utilization{
+		double time = 1;
+		double utilization = 2;
+		string notes = 3; // unit, other remarks
+}
+
+
+//
+message ApplicationMetrics{
+	string Name = 1;
+	string ID = 2;
+	repeated ComponentMetrics componentMetrics=3;
+	repeated NetworkMetrics vNetworkMetrics = 4; //includes virtual switches, routers and links
+	repeated Utilization responseTime = 5;//ms (processing time of all the event chain)
+
+}
+
+message ComponentMetrics{
+	repeated Utilization vCpuUtilization =3;
+	repeated Utilization vMemoryUtilization =4;
+	repeated Utilization vStorageUtilization =5;
+
+
+}
