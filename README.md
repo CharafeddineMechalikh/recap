@@ -14,7 +14,7 @@ RECAP Discrete Event Simulation Framework an extension for CloudSimPlus (http://
 	* If using Eclipse, see example launching options the "RecapSimPlusLauncherExperiment" and "RecapSimPlusLauncherTestMode" under the "Java Application -> Run Configurations" menu.
 
 2. Using Web API
-	* Under the "RecapSim-API" component launch main class "RecapSimApiService" which will start a web service on your machine where you can post simulation experiments in JSON format
+	* Under the "RecapSim-API" component launch main class "RecapSimApiService" which will start an Apache web service on your machine where you can post simulation experiments in JSON format
 	* For example "curl -X POST -H "Content-Type: application/json" -d @../ReadyModels/ElasticSearchExperiment.json http://localhost:4567/StartSimulation"
 
 3. Use a pre-made usecase scenario generator
@@ -24,7 +24,7 @@ RECAP Discrete Event Simulation Framework an extension for CloudSimPlus (http://
 		3. Run the generated experiment via simulation
 
 
-# Useful files to debug 
+# Useful files to start with
 You can run these files in debug mode to see the step by step logic of model creation and simulation start to understant how things work.
 	
 * eu.recap.sim.RecapSimPlusLauncher.java
@@ -40,7 +40,7 @@ RecapSim-package  | Root package that contains all the folders below.
 RecapSim-API  | REST API component that can be used to launch experiments over the web.
 RecapSim-models  | Models that are used to create simulation experiments. Protobuffer files plus the generated Java code. See https://developers.google.com/protocol-buffers for more detail.
 RecapSimPlus  | Core code and extensions for CloudSimPlus library.
-RecapSim-usecases | An example code that used to generate a simulation experiment based on an Elastic Search application usage logs.
+RecapSim-usecases | An example code that used to generate a simulation experiment based on an Elastic Search application usage logs. See "Modelling and Simulation of ElasticSearch using CloudSim" publication at https://ieeexplore.ieee.org/abstract/document/8958653 for which this was used as a basis.
 
 
 
